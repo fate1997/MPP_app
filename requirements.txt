@@ -1,0 +1,12 @@
+cirpy==1.0.2
+easydict==1.9
+networkx==2.8.4
+numpy==1.22.3
+Pillow==9.4.0
+PyYAML==6.0
+rdkit==2022.9.5
+scipy==1.7.3
+streamlit==1.9.0
+streamlit_option_menu==0.3.2
+torch==1.9.0+cu111
+torch_geometric==2.0.1
