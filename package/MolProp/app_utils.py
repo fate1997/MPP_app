@@ -31,10 +31,10 @@ def smiles2Data(smiles, temperature):
     feature_dict = featurizer(mol)
     data.edge_index = feature_dict['edge_index']
     data.x = torch.tensor(feature_dict['x'], dtype=torch.float32)
-    print(data.x.shape)
+
     data.num_nodes = data.x.size(0)
     data.batch = torch.LongTensor([0]*data.num_nodes)
-    return data
+    return data, feature_dict['L']
 
 
 def load_config(path):
