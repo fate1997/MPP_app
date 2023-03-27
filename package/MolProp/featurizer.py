@@ -104,6 +104,7 @@ class MoleculeFeaturizer(object):
             feature, L = self._atom_featurizer(atom)
             atom_features.append(feature) 
         self.feature_dict['x'] = atom_features
+        self.feature_dict['L'] = L
 
         # position
         if 'pos' in self.additional_features:
