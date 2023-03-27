@@ -101,7 +101,7 @@ class MoleculeFeaturizer(object):
         # atom features
         atom_features = []
         for atom in mol.GetAtoms():
-            feature, L = self._atom_featurizer(atom)
+            feature = self._atom_featurizer(atom)
             atom_features.append(feature) 
         self.feature_dict['x'] = atom_features
 
