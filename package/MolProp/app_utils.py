@@ -34,7 +34,7 @@ def smiles2Data(smiles, temperature):
 
     data.num_nodes = data.x.size(0)
     data.batch = torch.LongTensor([0]*data.num_nodes)
-    return data, feature_dict['L']
+    return data
 
 
 def load_config(path):
