@@ -21,7 +21,7 @@ class MoleculeFeaturizer(object):
         self.additional_features = additional_features
 
     def _atom_featurizer(self, atom: Atom) -> List:
-        L = {}
+
         # atom type one-hot encoding
         atomic_numer = [1, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 28, 29, 
                         30, 31, 32, 33, 34, 35, 36, 37, 38, 46, 47, 48, 49, 50, 51, 52, 53, 82]
@@ -29,32 +29,32 @@ class MoleculeFeaturizer(object):
         # atomic_numer = [1, 5, 6, 7, 8, 9, 13, 14, 15, 16, 17, 19, 31, 35, 53, 82]
         atom_type_value = atom.GetAtomicNum()
         atom_type_features = one_hot_encoding(atom_type_value, atomic_numer)
-        L['atom_type_features'] = len(atom_type_features)
+
         # atom degree one-hot encoding
         degree_choices = list(range(5))
         degree = atom.GetTotalDegree()
         degree_features = one_hot_encoding(degree, degree_choices)
-        L['degree_features'] = len(degree_features)
+
         # atom hybridization one-hot encoding
         hybridization_choices = list(range(len(Chem.HybridizationType.names)-1))
         hybridization = int(atom.GetHybridization())
         hybrid_features = one_hot_encoding(hybridization, hybridization_choices)
-        L['hybrid_features'] = len(hybrid_features)
+
         # chiral tag one-hot encoding
         chiral_tag_choices = list(range(len(Chem.ChiralType.names)-1))
         chiral_tag = atom.GetChiralTag()
         chiral_tag_features = one_hot_encoding(chiral_tag, chiral_tag_choices)
-        L['chiral_tag_features'] = len(chiral_tag_features)
+
         # number of hydrogens one-hot encoding
         num_Hs_choices = list(range(5))
         num_Hs = atom.GetTotalNumHs()
         num_Hs_features = one_hot_encoding(num_Hs, num_Hs_choices)
-        L['num_Hs_features'] = len(num_Hs_features)
+
         # aromatic
         aromatic_features = [1 if atom.GetIsAromatic() else 0]
         
         # concat features
-        return atom_type_features + degree_features + hybrid_features + chiral_tag_features + num_Hs_features + aromatic_features, L
+        return atom_type_features + degree_features + hybrid_features + chiral_tag_features + num_Hs_features + aromatic_features
     
     def _get_postions(self, mol: Mol):
         params = AllChem.ETKDGv3()
@@ -104,7 +104,6 @@ class MoleculeFeaturizer(object):
             feature, L = self._atom_featurizer(atom)
             atom_features.append(feature) 
         self.feature_dict['x'] = atom_features
-        self.feature_dict['L'] = L
 
         # position
         if 'pos' in self.additional_features:
