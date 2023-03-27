@@ -27,7 +27,7 @@ def smiles2Data(smiles, temperature):
     mol = Chem.MolFromSmiles(smiles)
     data = MolPropData(smiles=smiles)
     data.temps = torch.tensor([temperature], dtype=torch.float32).unsqueeze(0)
-    featurizer = MoleculeFeaturizer(additional_features=['pos', 'subgraph_index'])
+    featurizer = MoleculeFeaturizer(additional_features=None)
     feature_dict = featurizer(mol)
     data.edge_index = feature_dict['edge_index']
     data.x = torch.tensor(feature_dict['x'], dtype=torch.float32)
