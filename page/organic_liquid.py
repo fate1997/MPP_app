@@ -104,8 +104,8 @@ class OrganicLiquid:
             flag = 0
         if flag == 0:   return
                     
-        data = smiles2Data(smiles, temperature)
-        
+        data, L = smiles2Data(smiles, temperature)
+        st.write(L)
         task_value = {}
         for task in self.tasks:
             if todo_tasks[task]:
